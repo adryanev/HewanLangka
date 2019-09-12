@@ -20,7 +20,6 @@
             android:layout_height="match_parent"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:layout_marginBottom="8dp"
             tools:listitem="@layout/main_hewan_list"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 

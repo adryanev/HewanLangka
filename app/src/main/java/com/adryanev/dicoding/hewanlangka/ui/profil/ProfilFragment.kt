@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.adryanev.dicoding.hewanlangka.R
+import com.adryanev.dicoding.hewanlangka.databinding.ProfilFragmentBinding
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 class ProfilFragment : Fragment() {
 
@@ -21,7 +24,14 @@ class ProfilFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.profil_fragment, container, false)
+
+        val binding = ProfilFragmentBinding.inflate(inflater, container, false)
+
+        Glide.with(context!!)
+            .load("https://www.dicoding.com/images/small/avatar/20190828003743d3ab2f0ba6936b967b1ba42ef9d8e9ed.jpg")
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(binding.profilImage)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

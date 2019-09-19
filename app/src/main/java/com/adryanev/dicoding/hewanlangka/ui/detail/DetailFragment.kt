@@ -1,13 +1,15 @@
 package com.adryanev.dicoding.hewanlangka.ui.detail
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 
-import com.adryanev.dicoding.hewanlangka.R
+import com.adryanev.dicoding.hewanlangka.databinding.DetailFragmentBinding
+import com.adryanev.dicoding.hewanlangka.utils.InjectorUtils
 
 class DetailFragment : Fragment() {
 
@@ -15,19 +17,22 @@ class DetailFragment : Fragment() {
         fun newInstance() = DetailFragment()
     }
 
-    private lateinit var viewModel: DetailViewModel
 
+    private val args: DetailFragmentArgs by navArgs()
+
+    private val detailViewModel: DetailViewModel by viewModels {
+        InjectorUtils.provideDetailViewModelFactory(requireContext(), args.id)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.detail_fragment, container, false)
-    }
+        val binding = DetailFragmentBinding.inflate(inflater, container, false).apply {
+            vm = detailViewModel
+            lifecycleOwner = this@DetailFragment
+        }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
-        // TODO: Use the ViewModel
+        return binding.root
     }
 
 }
